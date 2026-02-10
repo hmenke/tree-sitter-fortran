@@ -320,7 +320,7 @@ module.exports = grammar({
     ),
 
     module_statement: $ => seq(caseInsensitive('module'), $._name, $._end_of_statement),
-    end_module_statement: $ => blockStructureEnding($, 'module'),
+    end_module_statement: $ => prec(1, blockStructureEnding($, 'module')),
 
     submodule: $ => seq(
       $.submodule_statement,
@@ -2410,6 +2410,7 @@ module.exports = grammar({
       caseInsensitive('kind'),
       caseInsensitive('len'),
       caseInsensitive('lock'),
+      caseInsensitive('module'),
       caseInsensitive('null'),
       prec(-1, caseInsensitive('open')),
       caseInsensitive('optional'),
